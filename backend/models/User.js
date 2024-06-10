@@ -15,6 +15,10 @@ const userSchema = new Schema({
         unique: true,
         required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     avatar: {
         type: String,
         default: "https://reedbarger.nyc3.digitaloceanspaces.com/default-avatar.png"
@@ -34,36 +38,36 @@ const userSchema = new Schema({
         }
     ],
     videoLikes: [
-        { 
-            type: Schema.Types.ObjectId, 
-            ref: 'VideoLike' 
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'VideoLike'
         }
     ],
     comments: [
-        { 
-            type: Schema.Types.ObjectId, 
-            ref: 'Comment' 
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment'
         }
     ],
     subscribers: [
-        { 
-            type: Schema.Types.ObjectId, 
-            ref: 'User' 
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
     ],
     subscribedTo: [
-        { 
-            type: Schema.Types.ObjectId, 
-            ref: 'User' 
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
     ],
     views: [
-        { 
-            type: Schema.Types.ObjectId, 
-            ref: 'View' 
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'View'
         }
     ]
 })
 
-const User = mongoose.model('User',userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;
