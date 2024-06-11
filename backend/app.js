@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose')
 const connectDB = require('./db/connect')
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 require('dotenv').config()
 const port = 3000;
@@ -10,9 +11,10 @@ const port = 3000;
 app.use(express.json());
 
 app.use('/api/v1/auth', authRoutes);
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
+app.use('/api/v1/user', userRoutes);
+// app.get('/', (req, res) => {
+//   res.send('Hello, World!');
+// });
 // app.get('/', (req, res) => {
 //     res.send('Hello, sunil!');
 //   });
