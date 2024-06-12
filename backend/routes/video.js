@@ -7,6 +7,8 @@ const View = require('../models/View')
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
+
+
 const authMiddleware = (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) return res.status(401).send('No token provided');
@@ -102,7 +104,26 @@ router.get('/:id/comments', authMiddleware, async (req, res) => {
 })
 
 
+router.post('/:id/like', authMiddleware, async (req, res) => {
+    try {
+        const { like } = req.body;
+        const videoLike = new VideoLike({ like, userId: req.userId, videoId: req.params.id })
+        await videoLike.save();
+        res.status(201).send(videoLike)
+    } catch (error) {
+        res.status(400).send(error);
+    }
+});
 
+router.post('/:id/view', authMiddleware, async (req, res) => {
+    try {
+        const view = new View({ userId: req.userId, videoId: req.params.id })
+        await view.save();
+        res.status(201).send(view)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
 
 
 module.exports = router;
