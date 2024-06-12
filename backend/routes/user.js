@@ -9,7 +9,7 @@ const authMiddleware = (req, res, next) => {
 
     const token = authHeader.split(' ')[1]; // to remove Bearer from token
     if (!token) return res.status(401).send('Invalid token');
-     
+
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = decoded.userId;
@@ -29,7 +29,7 @@ router.get('/profile', authMiddleware, async (req, res) => {
     }
 });
 
-router.put('/profile',authMiddleware ,async (req, res) => {
+router.put('/profile', authMiddleware, async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.userId, req.body, { new: true });
         if (!user) return res.status(404).send('User not found');

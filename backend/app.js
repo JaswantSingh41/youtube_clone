@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const connectDB = require('./db/connect')
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
-
+const videoRoutes = require('./routes/video')
 require('dotenv').config()
 const port = 3000;
 
@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/video', videoRoutes);
 // app.get('/', (req, res) => {
 //   res.send('Hello, World!');
 // });
